@@ -67,28 +67,30 @@ export default function CertificationsPage() {
                 <div
                   key={cert.id}
                   className={cn(
-                    'rounded-2xl border p-7 shadow-card hover:shadow-card-hover',
+                    'rounded-2xl border p-6 sm:p-7 shadow-card hover:shadow-card-hover h-full flex flex-col justify-between',
                     'hover:-translate-y-1 transition-all duration-300',
                     colors.bg, colors.border,
                     inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
                   )}
                   style={{ transitionDelay: `${i * 90}ms` }}
                 >
-                  {/* Icon + Badge row */}
-                  <div className="flex items-start justify-between mb-5">
-                    <div className={cn('w-14 h-14 rounded-2xl flex items-center justify-center text-3xl', colors.icon)}>
-                      {cert.icon}
+                  <div>
+                    {/* Icon + Badge row */}
+                    <div className="flex items-start justify-between mb-5">
+                      <div className={cn('w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0', colors.icon)}>
+                        {cert.icon}
+                      </div>
+                      <span className={cn('text-xs font-bold px-3 py-1 rounded-full shadow-sm', colors.badge)}>
+                        Certified
+                      </span>
                     </div>
-                    <span className={cn('text-xs font-bold px-3 py-1 rounded-full', colors.badge)}>
-                      Certified
-                    </span>
+
+                    <h3 className="font-display font-bold text-ocean-900 text-lg mb-0.5">{cert.name}</h3>
+                    <p className="text-xs text-slate-500 font-medium mb-3">{cert.fullName}</p>
+                    <p className="text-slate-600 text-sm leading-relaxed mb-5">{cert.description}</p>
                   </div>
 
-                  <h3 className="font-display font-bold text-ocean-900 text-lg mb-0.5">{cert.name}</h3>
-                  <p className="text-xs text-slate-500 font-medium mb-3">{cert.fullName}</p>
-                  <p className="text-slate-600 text-sm leading-relaxed mb-5">{cert.description}</p>
-
-                  <button className="flex items-center gap-2 text-sm font-semibold text-ocean-700 hover:text-teal-600 transition-colors">
+                  <button className="flex items-center gap-2 text-sm font-semibold text-ocean-700 hover:text-teal-600 transition-colors mt-auto pt-2">
                     <Download size={14} /> Download Certificate
                   </button>
                 </div>

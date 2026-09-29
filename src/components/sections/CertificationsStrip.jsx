@@ -19,24 +19,25 @@ export default function CertificationsStrip({ className }) {
           subtitle="Every product we manufacture meets strict global standards — certified and verified by trusted regulatory authorities."
         />
 
-        <div ref={ref} className="flex flex-wrap justify-center gap-4 md:gap-6 mb-6 md:mb-8">
+        <div ref={ref} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-5 mb-6 md:mb-8 max-w-5xl mx-auto">
           {CERTIFICATIONS.map((cert, i) => (
             <div
               key={cert.id}
               className={cn(
-                'flex flex-col items-center gap-3 bg-white border border-slate-200 rounded-2xl px-6 py-5',
-                'hover:border-ocean-300 hover:shadow-card hover:-translate-y-1',
-                'transition-all duration-300 cursor-default group min-w-[140px]',
+                'flex flex-col items-center justify-between bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 h-full',
+                'hover:border-teal-400/80 hover:shadow-card hover:-translate-y-1 shadow-sm',
+                'transition-all duration-300 cursor-default group w-full text-center',
+                i === 4 ? 'col-span-2 sm:col-span-1 max-w-[260px] sm:max-w-none mx-auto' : '',
                 inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               )}
               style={{ transitionDelay: `${i * 80}ms`, transition: 'all 0.4s ease' }}
             >
               {/* Real cert image */}
-              <div className="w-16 h-16 flex items-center justify-center">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center mb-2 shrink-0 p-1">
                 <img
                   src={cert.image}
                   alt={cert.name}
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-contain filter drop-shadow-sm group-hover:scale-105 transition-transform duration-300"
                   loading="lazy"
                   onError={(e) => {
                     // Fallback to emoji icon if image fails
@@ -45,16 +46,19 @@ export default function CertificationsStrip({ className }) {
                   }}
                 />
                 <div
-                  className="w-16 h-16 rounded-xl bg-ocean-50 text-ocean-700 text-3xl items-center justify-center hidden"
+                  className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-ocean-50 text-ocean-700 text-2xl sm:text-3xl items-center justify-center hidden"
                 >
                   {cert.icon}
                 </div>
               </div>
-              <div className="text-center">
-                <p className="font-semibold text-sm text-ocean-900 group-hover:text-ocean-700 transition-colors leading-tight">
+
+              <div className="text-center w-full mt-auto">
+                <p className="font-display font-bold text-xs sm:text-sm text-ocean-950 group-hover:text-teal-700 transition-colors leading-tight line-clamp-1">
                   {cert.name}
                 </p>
-                <p className="text-xs text-slate-400 mt-0.5 leading-tight">{cert.fullName.split(' ').slice(0, 3).join(' ')}</p>
+                <p className="text-[10px] sm:text-xs text-slate-400 mt-1 leading-tight line-clamp-1">
+                  {cert.fullName.split(' ').slice(0, 3).join(' ')}
+                </p>
               </div>
             </div>
           ))}
