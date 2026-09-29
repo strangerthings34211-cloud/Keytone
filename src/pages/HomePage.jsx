@@ -28,11 +28,16 @@ import { getRecentPosts } from '@/data/blogPosts'
 import { EXPORT_MARKETS, SITE_IMAGES } from '@/data/certifications'
 
 
-// ── Realistic Video Hero Section with Aquaculture Performance Showcase ───
+// ── Realistic Video Hero Section with Aquaculture Performance Showcase & Scroll Parallax ───
 function HeroVideoSection() {
   const [activeHighlight, setActiveHighlight] = useState('iboost') // 'iboost' | 'keytoneps' | 'shooter'
   const [heroMuted, setHeroMuted] = useState(true)
   const heroVideoRef = useRef(null)
+
+  const { scrollY } = useScroll()
+  const videoY = useTransform(scrollY, [0, 800], [0, 180])
+  const videoScale = useTransform(scrollY, [0, 800], [1.05, 1.18])
+  const overlayOpacity = useTransform(scrollY, [0, 600], [0.82, 0.96])
 
   const toggleHeroSound = () => {
     if (heroVideoRef.current) {
@@ -46,6 +51,7 @@ function HeroVideoSection() {
       name: 'Keytone I Boost ™',
       tagline: 'β-Glucan + Probiotics + Multi-Enzymes',
       badge: '✨ Best Seller',
+      icon: '🔬',
       image: '/images/I-Boost-1.png',
       link: '/products/enzymes/i-boost',
       stat1: { val: '1.18', label: 'Optimized FCR' },
@@ -57,6 +63,7 @@ function HeroVideoSection() {
       name: 'Keytone PS ™',
       tagline: 'Photosynthetic Probiotic Pond Bio-Remediator',
       badge: '💧 Water Care',
+      icon: '💧',
       image: '/images/keytone-ps.png',
       link: '/products/water-quality-enhancers/keytone-ps',
       stat1: { val: '<0.01', label: 'Ammonia ppm' },
@@ -68,6 +75,7 @@ function HeroVideoSection() {
       name: 'Keytone Shooter ™',
       tagline: 'Rapid White Feces & Gut Disorder Solution',
       badge: '🛡️ Gut Shield',
+      icon: '🛡️',
       image: '/images/Keytone-shooter-White-Gut-Disease-solution-1.png',
       link: '/products/water-quality-enhancers/shooter',
       stat1: { val: '3 Days', label: 'WFS Control' },
@@ -81,8 +89,11 @@ function HeroVideoSection() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-ocean-950">
-      {/* 1. Realistic Background Video */}
-      <div className="absolute inset-0 overflow-hidden">
+      {/* 1. Realistic Parallax Background Video */}
+      <motion.div
+        className="absolute inset-0 overflow-hidden pointer-events-none will-change-transform"
+        style={{ y: videoY, scale: videoScale }}
+      >
         <video
           ref={heroVideoRef}
           autoPlay
@@ -90,21 +101,24 @@ function HeroVideoSection() {
           muted={heroMuted}
           playsInline
           poster="/images/Keytone-Life-Sciences.png"
-          className="w-full h-full object-cover object-center scale-105"
+          className="w-full h-full object-cover object-center"
         >
           <source src="/videos/hero-aquaculture.webm" type="video/webm" />
         </video>
 
         {/* Multi-layer Cinematic Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-ocean-950/95 via-ocean-950/80 to-ocean-900/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-ocean-950 via-transparent to-ocean-950/40" />
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-r from-ocean-950/95 via-ocean-950/85 to-ocean-900/50"
+          style={{ opacity: overlayOpacity }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-ocean-950 via-transparent to-ocean-950/50" />
         
         {/* Animated ambient glowing lights */}
-        <div className="absolute top-1/4 left-1/4 w-72 sm:w-96 h-72 sm:h-96 bg-teal-500/15 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-1/3 right-1/4 w-60 sm:w-80 h-60 sm:h-80 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
-      </div>
+        <div className="absolute top-1/4 left-1/4 w-80 sm:w-96 h-80 sm:h-96 bg-teal-500/20 rounded-full blur-3xl pointer-events-none animate-pulse" />
+        <div className="absolute bottom-1/3 right-1/4 w-72 sm:w-80 h-72 sm:h-80 bg-blue-500/20 rounded-full blur-3xl pointer-events-none" />
+      </motion.div>
 
-      {/* Floating Floral Effects */}
+      {/* Floating Floral & Particle Effects */}
       <SectionBackgroundFlora
         variant="dark"
         withPetals={true}
@@ -113,14 +127,14 @@ function HeroVideoSection() {
       />
 
       {/* Hero Video Audio Toggle Float */}
-      <div className="absolute top-20 sm:top-24 right-4 sm:right-6 z-20 hidden md:flex items-center gap-2 bg-ocean-950/70 backdrop-blur-md px-3 py-1.5 rounded-full border border-teal-400/30 shadow-lg text-white text-xs">
+      <div className="absolute top-20 sm:top-24 right-4 sm:right-6 z-20 hidden md:flex items-center gap-2 bg-ocean-950/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-teal-400/30 shadow-lg text-white text-xs">
         <button
           onClick={toggleHeroSound}
-          className="flex items-center gap-1.5 text-teal-300 hover:text-white transition-colors"
+          className="flex items-center gap-2 text-teal-300 hover:text-white transition-colors cursor-pointer"
           title={heroMuted ? 'Turn Sound On' : 'Mute Sound'}
         >
           {heroMuted ? <VolumeX size={15} /> : <Volume2 size={15} className="text-emerald-400 animate-pulse" />}
-          <span className="text-[11px] font-semibold">{heroMuted ? 'Muted' : 'Audio On'}</span>
+          <span className="text-[11px] font-semibold">{heroMuted ? 'Background Sound' : 'Sound Playing'}</span>
         </button>
       </div>
 
@@ -130,8 +144,8 @@ function HeroVideoSection() {
           
           {/* Left Column: Heading & Content */}
           <div className="lg:col-span-7 max-w-3xl text-center lg:text-left">
-            {/* Tag Badge */}
-            <div className="inline-flex items-center gap-2 bg-teal-500/20 backdrop-blur-md border border-teal-400/40 text-teal-300 text-[11px] sm:text-xs font-semibold tracking-widest uppercase px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6 shadow-sm">
+            {/* Tag Badge with Shimmer */}
+            <div className="inline-flex items-center gap-2 bg-teal-500/20 backdrop-blur-md border border-teal-400/50 text-teal-300 text-[11px] sm:text-xs font-semibold tracking-widest uppercase px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6 shadow-sm">
               <span className="w-2 h-2 rounded-full bg-teal-400 animate-ping" />
               <span className="w-1.5 h-1.5 rounded-full bg-teal-400 -ml-3" />
               Aquaculture Biotechnology &amp; Feed Supplements
@@ -139,22 +153,40 @@ function HeroVideoSection() {
 
             {/* Main Headline */}
             <h1
-              className="font-display font-extrabold text-white leading-[1.1] sm:leading-[1.05] tracking-tight mb-4 sm:mb-6 drop-shadow-md text-3xl sm:text-5xl md:text-6xl lg:text-6xl"
+              className="font-display font-extrabold text-white leading-[1.08] sm:leading-[1.05] tracking-tight mb-4 sm:mb-6 drop-shadow-md text-3xl sm:text-5xl md:text-6xl lg:text-[4rem]"
             >
               Healthy Culture,<br />
-              <span className="text-gradient-hero">Wealthy Farmer</span>
+              <span className="bg-gradient-to-r from-teal-300 via-cyan-300 to-emerald-400 bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(45,212,191,0.4)]">
+                Wealthy Farmer
+              </span>
             </h1>
 
             {/* Subheadline */}
-            <p className="text-white/85 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed mb-6 sm:mb-8 max-w-2xl font-normal mx-auto lg:mx-0">
+            <p className="text-white/85 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed mb-5 sm:mb-6 max-w-2xl font-normal mx-auto lg:mx-0">
               GMP, ISO 9001 &amp; HACCP certified probiotics, enzymes, and water conditioners engineered to optimize FCR, boost natural immunity, and protect shrimp &amp; fish crops across 10+ global markets.
             </p>
+
+            {/* Trust Badges Strip */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-3 mb-6 sm:mb-8 text-xs text-white/90">
+              <div className="flex items-center gap-1.5 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15">
+                <CheckCircle2 size={13} className="text-teal-400 shrink-0" />
+                <span>GMP &amp; ISO 9001:2015</span>
+              </div>
+              <div className="flex items-center gap-1.5 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15">
+                <CheckCircle2 size={13} className="text-emerald-400 shrink-0" />
+                <span>12+ Years Field-Tested</span>
+              </div>
+              <div className="flex items-center gap-1.5 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15">
+                <CheckCircle2 size={13} className="text-teal-400 shrink-0" />
+                <span>10+ Global Markets</span>
+              </div>
+            </div>
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4">
               <Link
                 to="/products"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-teal-400 to-teal-500 text-ocean-950 font-bold px-7 sm:px-8 py-3.5 sm:py-4 rounded-full hover:from-teal-300 hover:to-teal-400 transition-all duration-200 shadow-lg hover:shadow-teal-500/25 hover:scale-105 text-sm"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-teal-400 via-cyan-400 to-teal-500 text-ocean-950 font-bold px-7 sm:px-8 py-3.5 sm:py-4 rounded-full hover:from-teal-300 hover:to-teal-400 transition-all duration-200 shadow-[0_4px_25px_rgba(45,212,191,0.35)] hover:scale-105 text-sm"
               >
                 Explore 30+ Products <ArrowRight size={16} />
               </Link>
@@ -166,17 +198,17 @@ function HeroVideoSection() {
                     target.scrollIntoView({ behavior: 'smooth' })
                   }
                 }}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-md border border-white/25 hover:border-teal-400/50 text-white font-semibold px-6 sm:px-7 py-3.5 sm:py-4 rounded-full hover:bg-white/20 transition-all duration-200 text-sm"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-md border border-white/25 hover:border-teal-400/50 text-white font-semibold px-6 sm:px-7 py-3.5 sm:py-4 rounded-full hover:bg-white/20 transition-all duration-200 text-sm cursor-pointer"
               >
-                <Play size={15} className="text-teal-400 fill-teal-400" /> Watch Video Tour
+                <Play size={15} className="text-teal-400 fill-teal-400 animate-pulse" /> Watch Video Tour
               </button>
             </div>
           </div>
 
-          {/* Right Column: Clean Spotlight Formulation Card */}
+          {/* Right Column: Clean Spotlight Formulation Showcase */}
           <div className="lg:col-span-5 relative mt-4 lg:mt-0">
             {/* Ambient Background Glow */}
-            <div className="absolute -inset-1.5 bg-gradient-to-r from-teal-500/30 via-ocean-500/20 to-teal-400/30 rounded-3xl blur-2xl opacity-75 pointer-events-none" />
+            <div className="absolute -inset-1.5 bg-gradient-to-r from-teal-500/35 via-cyan-500/25 to-emerald-500/35 rounded-3xl blur-2xl opacity-80 pointer-events-none" />
 
             <div className="relative bg-ocean-950/90 backdrop-blur-2xl border border-white/20 rounded-3xl p-5 sm:p-6 shadow-2xl overflow-hidden">
               
@@ -190,36 +222,38 @@ function HeroVideoSection() {
                   <button
                     onClick={() => setActiveHighlight('iboost')}
                     className={cn(
-                      'px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg font-bold transition-all text-xs',
+                      'px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg font-bold transition-all text-xs flex items-center gap-1',
                       activeHighlight === 'iboost' ? 'bg-gradient-to-r from-teal-400 to-teal-500 text-ocean-950 shadow-md' : 'text-white/70 hover:text-white'
                     )}
                   >
-                    I-Boost
+                    <span>🔬</span> I-Boost
                   </button>
                   <button
                     onClick={() => setActiveHighlight('keytoneps')}
                     className={cn(
-                      'px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg font-bold transition-all text-xs',
+                      'px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg font-bold transition-all text-xs flex items-center gap-1',
                       activeHighlight === 'keytoneps' ? 'bg-gradient-to-r from-teal-400 to-teal-500 text-ocean-950 shadow-md' : 'text-white/70 hover:text-white'
                     )}
                   >
-                    Keytone PS
+                    <span>💧</span> Keytone PS
                   </button>
                   <button
                     onClick={() => setActiveHighlight('shooter')}
                     className={cn(
-                      'px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg font-bold transition-all text-xs',
+                      'px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg font-bold transition-all text-xs flex items-center gap-1',
                       activeHighlight === 'shooter' ? 'bg-gradient-to-r from-teal-400 to-teal-500 text-ocean-950 shadow-md' : 'text-white/70 hover:text-white'
                     )}
                   >
-                    Shooter
+                    <span>🛡️</span> Shooter
                   </button>
                 </div>
               </div>
 
               {/* Product Visual Showcase Box */}
-              <div className="relative rounded-2xl bg-gradient-to-b from-ocean-900/80 to-ocean-950/90 border border-teal-500/30 p-4 sm:p-5 flex flex-col items-center">
-                
+              <div className="relative rounded-2xl bg-gradient-to-b from-ocean-900/85 to-ocean-950/95 border border-teal-500/30 p-4 sm:p-5 flex flex-col items-center overflow-hidden">
+                {/* Radial ambient spot */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(45,212,191,0.15)_0%,transparent_70%)] pointer-events-none" />
+
                 {/* Badge Top Left */}
                 <div className="absolute top-3 left-3 bg-ocean-900/90 backdrop-blur-md border border-teal-400/30 rounded-lg px-2.5 py-1 text-[11px] font-semibold text-teal-300 shadow-md">
                   {current.badge}
@@ -231,17 +265,17 @@ function HeroVideoSection() {
                 </div>
 
                 {/* Product Packaging Image */}
-                <div className="my-2 h-36 sm:h-44 flex items-center justify-center">
+                <div className="my-2 h-36 sm:h-44 flex items-center justify-center relative z-10">
                   <img
                     src={current.image}
                     alt={current.name}
-                    className="max-h-full max-w-[170px] sm:max-w-[210px] object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)] hover:scale-105 transition-transform duration-300"
+                    className="max-h-full max-w-[170px] sm:max-w-[210px] object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.7)] hover:scale-105 transition-transform duration-300"
                     loading="eager"
                   />
                 </div>
 
                 {/* Title & Tagline */}
-                <div className="text-center w-full mt-1">
+                <div className="text-center w-full mt-1 relative z-10">
                   <h3 className="text-white font-display font-extrabold text-base sm:text-lg">{current.name}</h3>
                   <p className="text-teal-300 text-xs font-medium mt-0.5">{current.tagline}</p>
                   <p className="text-slate-300 text-xs mt-2 line-clamp-2 leading-relaxed px-2 font-normal">
@@ -252,15 +286,15 @@ function HeroVideoSection() {
 
               {/* Metrics Row */}
               <div className="grid grid-cols-3 gap-2 mt-3 text-center">
-                <div className="bg-white/5 rounded-xl p-2 border border-white/10">
+                <div className="bg-white/5 rounded-xl p-2 border border-white/10 hover:border-teal-400/30 transition-colors">
                   <p className="text-teal-300 font-extrabold text-sm sm:text-base">{current.stat1.val}</p>
                   <p className="text-[9px] sm:text-[10px] text-white/60 uppercase tracking-wider font-semibold mt-0.5">{current.stat1.label}</p>
                 </div>
-                <div className="bg-white/5 rounded-xl p-2 border border-white/10">
+                <div className="bg-white/5 rounded-xl p-2 border border-white/10 hover:border-emerald-400/30 transition-colors">
                   <p className="text-emerald-300 font-extrabold text-sm sm:text-base">{current.stat2.val}</p>
                   <p className="text-[9px] sm:text-[10px] text-white/60 uppercase tracking-wider font-semibold mt-0.5">{current.stat2.label}</p>
                 </div>
-                <div className="bg-white/5 rounded-xl p-2 border border-white/10">
+                <div className="bg-white/5 rounded-xl p-2 border border-white/10 hover:border-teal-400/30 transition-colors">
                   <p className="text-teal-300 font-extrabold text-sm sm:text-base">{current.stat3.val}</p>
                   <p className="text-[9px] sm:text-[10px] text-white/60 uppercase tracking-wider font-semibold mt-0.5">{current.stat3.label}</p>
                 </div>
