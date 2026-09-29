@@ -504,8 +504,8 @@ function CompanyGallery() {
           subtitle="From the laboratory to coastal farms — explore Keytone Life Sciences in action (click any photo to inspect in detail)."
         />
 
-        {/* Gallery Grid */}
-        <div ref={ref} className="grid grid-cols-2 md:grid-cols-3 gap-3.5 md:gap-5">
+        {/* Gallery Grid - Seamless gapless grid on mobile and desktop */}
+        <div ref={ref} className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-5">
           {images.map((img, i) => (
             <div
               key={i}
@@ -513,8 +513,9 @@ function CompanyGallery() {
               className={cn(
                 'relative rounded-2xl overflow-hidden group cursor-pointer shadow-md hover:shadow-2xl',
                 'border border-slate-200/80 hover:border-teal-500/80',
-                i === 0 ? 'md:col-span-2 md:row-span-2' : '',
-                i === 0 ? 'h-64 sm:h-80 md:h-auto min-h-[280px]' : 'h-48 sm:h-56 md:h-60',
+                i === 0
+                  ? 'h-44 sm:h-52 md:h-auto md:col-span-2 md:row-span-2 md:min-h-[380px]'
+                  : 'h-44 sm:h-52 md:h-56',
                 inView ? 'opacity-100 scale-100' : 'opacity-0 scale-95',
                 'transition-all duration-500 hover:-translate-y-1'
               )}
