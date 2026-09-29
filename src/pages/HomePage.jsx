@@ -28,9 +28,9 @@ import { getRecentPosts } from '@/data/blogPosts'
 import { EXPORT_MARKETS, SITE_IMAGES } from '@/data/certifications'
 
 
-// ── Realistic Video Hero Section with 3D Biotech Model Showcase ───
+// ── Realistic Video Hero Section with Aquaculture Performance Showcase ───
 function HeroVideoSection() {
-  const [activeModelTab, setActiveModelTab] = useState('product') // 'product' | 'pond' | 'gut'
+  const [activeHighlight, setActiveHighlight] = useState('iboost') // 'iboost' | 'keytoneps' | 'shooter'
   const [heroMuted, setHeroMuted] = useState(true)
   const heroVideoRef = useRef(null)
 
@@ -40,6 +40,44 @@ function HeroVideoSection() {
       setHeroMuted(!heroMuted)
     }
   }
+
+  const HIGHLIGHTS = {
+    iboost: {
+      name: 'Keytone I Boost ™',
+      tagline: 'β-Glucan + Probiotics + Multi-Enzymes',
+      badge: '✨ Best Seller',
+      image: '/images/I-Boost-1.png',
+      link: '/products/enzymes/i-boost',
+      stat1: { val: '1.18', label: 'Optimized FCR' },
+      stat2: { val: '+38%', label: 'Higher Survival' },
+      stat3: { val: '100%', label: 'Bio Safe' },
+      description: 'Strengthens hepatopancreas vitality, stimulates natural feeding response, and improves feed conversion efficiency across high-density ponds.'
+    },
+    keytoneps: {
+      name: 'Keytone PS ™',
+      tagline: 'Photosynthetic Probiotic Pond Bio-Remediator',
+      badge: '💧 Water Care',
+      image: '/images/keytone-ps.png',
+      link: '/products/water-quality-enhancers/keytone-ps',
+      stat1: { val: '<0.01', label: 'Ammonia ppm' },
+      stat2: { val: '+45%', label: 'DO Saturation' },
+      stat3: { val: '0 CFU', label: 'Vibrio Control' },
+      description: 'Reduces toxic hydrogen sulfide (H₂S) and organic sludge, creating a stable, clean phytoplankton environment.'
+    },
+    shooter: {
+      name: 'Keytone Shooter ™',
+      tagline: 'Rapid White Feces & Gut Disorder Solution',
+      badge: '🛡️ Gut Shield',
+      image: '/images/Keytone-shooter-White-Gut-Disease-solution-1.png',
+      link: '/products/water-quality-enhancers/shooter',
+      stat1: { val: '3 Days', label: 'WFS Control' },
+      stat2: { val: '99%', label: 'Gut Bio-Shield' },
+      stat3: { val: '+28%', label: 'Weight Gain' },
+      description: 'Clears white gut and running mortality by restoring beneficial intestinal microflora and gut mucosal barrier.'
+    }
+  }
+
+  const current = HIGHLIGHTS[activeHighlight]
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-ocean-950">
@@ -61,12 +99,12 @@ function HeroVideoSection() {
         <div className="absolute inset-0 bg-gradient-to-r from-ocean-950/95 via-ocean-950/80 to-ocean-900/40" />
         <div className="absolute inset-0 bg-gradient-to-t from-ocean-950 via-transparent to-ocean-950/40" />
         
-        {/* Animated ambient glowing lights & floral spores */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-500/15 rounded-full blur-3xl pointer-events-none animate-pulse" />
-        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
+        {/* Animated ambient glowing lights */}
+        <div className="absolute top-1/4 left-1/4 w-72 sm:w-96 h-72 sm:h-96 bg-teal-500/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-1/3 right-1/4 w-60 sm:w-80 h-60 sm:h-80 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
       </div>
 
-      {/* Floating Floral & Bio-Particle Effects */}
+      {/* Floating Floral Effects */}
       <SectionBackgroundFlora
         variant="dark"
         withPetals={true}
@@ -75,7 +113,7 @@ function HeroVideoSection() {
       />
 
       {/* Hero Video Audio Toggle Float */}
-      <div className="absolute top-24 right-6 z-20 hidden md:flex items-center gap-2 bg-ocean-950/70 backdrop-blur-md px-3 py-1.5 rounded-full border border-teal-400/30 shadow-lg text-white text-xs">
+      <div className="absolute top-20 sm:top-24 right-4 sm:right-6 z-20 hidden md:flex items-center gap-2 bg-ocean-950/70 backdrop-blur-md px-3 py-1.5 rounded-full border border-teal-400/30 shadow-lg text-white text-xs">
         <button
           onClick={toggleHeroSound}
           className="flex items-center gap-1.5 text-teal-300 hover:text-white transition-colors"
@@ -87,37 +125,36 @@ function HeroVideoSection() {
       </div>
 
       {/* 2. Hero Content Grid */}
-      <div className="container-xl relative z-10 pt-24 pb-12 lg:pt-28 lg:pb-16">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-8 items-center">
+      <div className="container-xl relative z-10 pt-20 pb-12 sm:pt-24 sm:pb-16 lg:pt-28 lg:pb-16">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           
           {/* Left Column: Heading & Content */}
-          <div className="lg:col-span-7 max-w-3xl">
+          <div className="lg:col-span-7 max-w-3xl text-center lg:text-left">
             {/* Tag Badge */}
-            <div className="inline-flex items-center gap-2.5 bg-teal-500/20 backdrop-blur-md border border-teal-400/40 text-teal-300 text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-full mb-6 shadow-sm">
+            <div className="inline-flex items-center gap-2 bg-teal-500/20 backdrop-blur-md border border-teal-400/40 text-teal-300 text-[11px] sm:text-xs font-semibold tracking-widest uppercase px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6 shadow-sm">
               <span className="w-2 h-2 rounded-full bg-teal-400 animate-ping" />
-              <span className="w-1.5 h-1.5 rounded-full bg-teal-400 -ml-3.5" />
+              <span className="w-1.5 h-1.5 rounded-full bg-teal-400 -ml-3" />
               Aquaculture Biotechnology &amp; Feed Supplements
             </div>
 
             {/* Main Headline */}
             <h1
-              className="font-display font-extrabold text-white leading-[1.05] tracking-tight mb-6 drop-shadow-md"
-              style={{ fontSize: 'clamp(2.85rem, 5.8vw, 4.75rem)' }}
+              className="font-display font-extrabold text-white leading-[1.1] sm:leading-[1.05] tracking-tight mb-4 sm:mb-6 drop-shadow-md text-3xl sm:text-5xl md:text-6xl lg:text-6xl"
             >
               Healthy Culture,<br />
               <span className="text-gradient-hero">Wealthy Farmer</span>
             </h1>
 
             {/* Subheadline */}
-            <p className="text-white/85 text-lg md:text-xl leading-relaxed mb-8 max-w-2xl font-normal">
+            <p className="text-white/85 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed mb-6 sm:mb-8 max-w-2xl font-normal mx-auto lg:mx-0">
               GMP, ISO 9001 &amp; HACCP certified probiotics, enzymes, and water conditioners engineered to optimize FCR, boost natural immunity, and protect shrimp &amp; fish crops across 10+ global markets.
             </p>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4">
               <Link
                 to="/products"
-                className="inline-flex items-center gap-2.5 bg-gradient-to-r from-teal-400 to-teal-500 text-ocean-950 font-bold px-8 py-4 rounded-full hover:from-teal-300 hover:to-teal-400 transition-all duration-200 shadow-lg hover:shadow-teal-500/25 hover:scale-105 text-sm"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-teal-400 to-teal-500 text-ocean-950 font-bold px-7 sm:px-8 py-3.5 sm:py-4 rounded-full hover:from-teal-300 hover:to-teal-400 transition-all duration-200 shadow-lg hover:shadow-teal-500/25 hover:scale-105 text-sm"
               >
                 Explore 30+ Products <ArrowRight size={16} />
               </Link>
@@ -129,248 +166,117 @@ function HeroVideoSection() {
                     target.scrollIntoView({ behavior: 'smooth' })
                   }
                 }}
-                className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/25 hover:border-teal-400/50 text-white font-semibold px-7 py-4 rounded-full hover:bg-white/20 transition-all duration-200 text-sm"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-md border border-white/25 hover:border-teal-400/50 text-white font-semibold px-6 sm:px-7 py-3.5 sm:py-4 rounded-full hover:bg-white/20 transition-all duration-200 text-sm"
               >
                 <Play size={15} className="text-teal-400 fill-teal-400" /> Watch Video Tour
               </button>
             </div>
           </div>
 
-
-          {/* Right Column: 3D Holographic Biotech Stage & Telemetry Showcase */}
-          <div className="lg:col-span-5 relative">
+          {/* Right Column: Clean Spotlight Formulation Card */}
+          <div className="lg:col-span-5 relative mt-4 lg:mt-0">
             {/* Ambient Background Glow */}
-            <div className="absolute -inset-2 bg-gradient-to-r from-teal-500/30 via-ocean-500/20 to-teal-400/30 rounded-3xl blur-2xl opacity-80 pointer-events-none" />
+            <div className="absolute -inset-1.5 bg-gradient-to-r from-teal-500/30 via-ocean-500/20 to-teal-400/30 rounded-3xl blur-2xl opacity-75 pointer-events-none" />
 
-            <div className="relative bg-ocean-950/85 backdrop-blur-2xl border border-white/20 rounded-3xl p-6 md:p-7 shadow-2xl overflow-hidden">
+            <div className="relative bg-ocean-950/90 backdrop-blur-2xl border border-white/20 rounded-3xl p-5 sm:p-6 shadow-2xl overflow-hidden">
               
-              {/* Header: Mode Switcher */}
-              <div className="flex items-center justify-between pb-4 mb-5 border-b border-white/10 flex-wrap gap-2">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-3 h-3 rounded-full bg-teal-400 animate-ping" />
-                  <span className="text-xs font-extrabold text-white uppercase tracking-widest">
-                    3D Biotech Visualizer
-                  </span>
-                </div>
+              {/* Selector Tabs */}
+              <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-white/10 flex-wrap gap-2">
+                <span className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
+                  <Sparkles size={13} className="text-teal-400" /> Featured Solutions
+                </span>
 
                 <div className="flex bg-ocean-900/90 p-1 rounded-xl border border-white/10 text-xs">
                   <button
-                    onClick={() => setActiveModelTab('product')}
+                    onClick={() => setActiveHighlight('iboost')}
                     className={cn(
-                      'px-3 py-1.5 rounded-lg font-bold transition-all flex items-center gap-1.5',
-                      activeModelTab === 'product' ? 'bg-gradient-to-r from-teal-400 to-teal-500 text-ocean-950 shadow-md' : 'text-white/65 hover:text-white'
+                      'px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg font-bold transition-all text-xs',
+                      activeHighlight === 'iboost' ? 'bg-gradient-to-r from-teal-400 to-teal-500 text-ocean-950 shadow-md' : 'text-white/70 hover:text-white'
                     )}
                   >
-                    <span>🔬</span> 3D Product
+                    I-Boost
                   </button>
                   <button
-                    onClick={() => setActiveModelTab('pond')}
+                    onClick={() => setActiveHighlight('keytoneps')}
                     className={cn(
-                      'px-3 py-1.5 rounded-lg font-bold transition-all flex items-center gap-1.5',
-                      activeModelTab === 'pond' ? 'bg-gradient-to-r from-teal-400 to-teal-500 text-ocean-950 shadow-md' : 'text-white/65 hover:text-white'
+                      'px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg font-bold transition-all text-xs',
+                      activeHighlight === 'keytoneps' ? 'bg-gradient-to-r from-teal-400 to-teal-500 text-ocean-950 shadow-md' : 'text-white/70 hover:text-white'
                     )}
                   >
-                    <span>💧</span> Pond Sensor
+                    Keytone PS
                   </button>
                   <button
-                    onClick={() => setActiveModelTab('gut')}
+                    onClick={() => setActiveHighlight('shooter')}
                     className={cn(
-                      'px-3 py-1.5 rounded-lg font-bold transition-all flex items-center gap-1.5',
-                      activeModelTab === 'gut' ? 'bg-gradient-to-r from-teal-400 to-teal-500 text-ocean-950 shadow-md' : 'text-white/65 hover:text-white'
+                      'px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg font-bold transition-all text-xs',
+                      activeHighlight === 'shooter' ? 'bg-gradient-to-r from-teal-400 to-teal-500 text-ocean-950 shadow-md' : 'text-white/70 hover:text-white'
                     )}
                   >
-                    <span>🛡️</span> Gut Biofilm
+                    Shooter
                   </button>
                 </div>
               </div>
 
-              {/* Viewport 1: 3D Holographic Stage with Interactive Product Switcher */}
-              {activeModelTab === 'product' && (
-                <div className="animate-fade-in">
-                  {/* 3D Visual Stage */}
-                  <div className="relative h-64 md:h-72 rounded-2xl bg-gradient-to-b from-ocean-900/90 via-ocean-950/95 to-ocean-950 border border-teal-500/30 overflow-hidden flex flex-col items-center justify-center p-4">
-                    
-                    {/* Hologram Light Grid & Radial Beam */}
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(14,165,196,0.18)_0%,transparent_70%)] pointer-events-none" />
-                    
-                    {/* Laser scanning line effect */}
-                    <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-teal-400/60 to-transparent top-1/4 animate-pulse pointer-events-none" />
-
-                    {/* 3D Floating Spec Badge Top Left */}
-                    <div className="absolute top-3 left-3 bg-ocean-900/90 backdrop-blur-md border border-teal-400/30 rounded-xl px-2.5 py-1 text-[11px] font-semibold text-teal-300 shadow-lg animate-bounce">
-                      ✨ Bio-Active Formulation
-                    </div>
-
-                    {/* 3D Floating Spec Badge Top Right */}
-                    <div className="absolute top-3 right-3 bg-ocean-900/90 backdrop-blur-md border border-emerald-400/30 rounded-xl px-2.5 py-1 text-[11px] font-semibold text-emerald-300 shadow-lg">
-                      ✓ GMP Validated
-                    </div>
-
-                    {/* 3D Stage Podium Rings */}
-                    <div className="absolute bottom-6 w-48 h-12 rounded-full border-2 border-teal-400/30 bg-teal-500/10 [transform:rotateX(60deg)] shadow-[0_0_25px_rgba(14,165,196,0.4)]" />
-                    <div className="absolute bottom-4 w-36 h-8 rounded-full border border-teal-300/40 [transform:rotateX(60deg)]" />
-
-                    {/* 3D Product Image with realistic float and drop shadow */}
-                    <div className="relative z-10 flex flex-col items-center group cursor-pointer">
-                      <img
-                        src="/images/I-Boost-1.png"
-                        alt="Keytone I Boost 3D Model"
-                        className="h-44 md:h-48 object-contain drop-shadow-[0_25px_30px_rgba(0,0,0,0.8)] transform group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-500"
-                      />
-                    </div>
-
-                    {/* Hologram Spec Bar */}
-                    <div className="absolute bottom-2 left-3 right-3 flex items-center justify-between bg-ocean-900/90 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-white/10 text-xs">
-                      <div>
-                        <span className="text-white font-extrabold block leading-tight">Keytone I Boost &trade;</span>
-                        <span className="text-teal-400 text-[10px] font-medium">&beta;-Glucan + Probiotics + Enzymes</span>
-                      </div>
-                      <Link
-                        to="/products/enzymes/i-boost"
-                        className="text-xs font-bold text-teal-300 hover:text-white bg-teal-500/20 border border-teal-400/40 px-2.5 py-1 rounded-lg transition-colors"
-                      >
-                        Specs &rarr;
-                      </Link>
-                    </div>
-                  </div>
-
-                  {/* Telemetry Metrics Row */}
-                  <div className="grid grid-cols-3 gap-2.5 mt-4 text-center">
-                    <div className="bg-white/5 rounded-2xl p-2.5 border border-white/10 hover:border-teal-400/30 transition-colors">
-                      <p className="text-teal-300 font-extrabold text-lg">1.18</p>
-                      <p className="text-[10px] text-white/55 uppercase tracking-wider font-semibold">FCR Efficiency</p>
-                    </div>
-                    <div className="bg-white/5 rounded-2xl p-2.5 border border-white/10 hover:border-emerald-400/30 transition-colors">
-                      <p className="text-emerald-300 font-extrabold text-lg">+38%</p>
-                      <p className="text-[10px] text-white/55 uppercase tracking-wider font-semibold">Crop Survival</p>
-                    </div>
-                    <div className="bg-white/5 rounded-2xl p-2.5 border border-white/10 hover:border-teal-400/30 transition-colors">
-                      <p className="text-teal-300 font-extrabold text-lg">100%</p>
-                      <p className="text-[10px] text-white/55 uppercase tracking-wider font-semibold">Zero Antibiotics</p>
-                    </div>
-                  </div>
+              {/* Product Visual Showcase Box */}
+              <div className="relative rounded-2xl bg-gradient-to-b from-ocean-900/80 to-ocean-950/90 border border-teal-500/30 p-4 sm:p-5 flex flex-col items-center">
+                
+                {/* Badge Top Left */}
+                <div className="absolute top-3 left-3 bg-ocean-900/90 backdrop-blur-md border border-teal-400/30 rounded-lg px-2.5 py-1 text-[11px] font-semibold text-teal-300 shadow-md">
+                  {current.badge}
                 </div>
-              )}
 
-              {/* Viewport 2: Real-time Pond Water Ecology Telemetry */}
-              {activeModelTab === 'pond' && (
-                <div className="animate-fade-in">
-                  <div className="h-64 md:h-72 rounded-2xl bg-gradient-to-b from-ocean-900/90 to-ocean-950/95 border border-teal-500/30 p-4 flex flex-col justify-between">
-                    <div className="flex items-center justify-between pb-2 border-b border-white/10">
-                      <span className="text-xs font-bold text-white flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                        Live Pond Biosphere Telemetry
-                      </span>
-                      <span className="text-[10px] font-semibold text-teal-400 bg-teal-500/10 px-2 py-0.5 rounded-md">
-                        Keytone PS &amp; Keolite Control
-                      </span>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-2.5 my-auto">
-                      <div className="bg-white/5 border border-white/10 rounded-xl p-3 text-center hover:bg-white/10 transition-colors">
-                        <span className="text-[11px] text-white/60 block font-medium">Dissolved Oxygen</span>
-                        <span className="text-xl font-extrabold text-teal-300">7.2 <span className="text-xs font-semibold">ppm</span></span>
-                        <span className="text-[10px] text-emerald-400 block font-bold mt-0.5">&uarr; +42% Saturation</span>
-                      </div>
-
-                      <div className="bg-white/5 border border-white/10 rounded-xl p-3 text-center hover:bg-white/10 transition-colors">
-                        <span className="text-[11px] text-white/60 block font-medium">Toxic Ammonia (NH₃)</span>
-                        <span className="text-xl font-extrabold text-emerald-300">&lt; 0.01 <span className="text-xs font-semibold">ppm</span></span>
-                        <span className="text-[10px] text-teal-300 block font-semibold mt-0.5">Bio-Neutralized</span>
-                      </div>
-
-                      <div className="bg-white/5 border border-white/10 rounded-xl p-3 text-center hover:bg-white/10 transition-colors">
-                        <span className="text-[11px] text-white/60 block font-medium">Alkalinity &amp; pH</span>
-                        <span className="text-xl font-extrabold text-teal-300">7.8 &ndash; 8.2</span>
-                        <span className="text-[10px] text-teal-400 block font-semibold mt-0.5">Stable Buffer Range</span>
-                      </div>
-
-                      <div className="bg-white/5 border border-white/10 rounded-xl p-3 text-center hover:bg-white/10 transition-colors">
-                        <span className="text-[11px] text-white/60 block font-medium">Pathogen (Vibrio)</span>
-                        <span className="text-xl font-extrabold text-emerald-400">0 <span className="text-xs font-semibold">CFU</span></span>
-                        <span className="text-[10px] text-emerald-400 block font-semibold mt-0.5">Full Bio-Suppression</span>
-                      </div>
-                    </div>
-
-                    <div className="bg-teal-500/10 border border-teal-500/30 rounded-xl px-3 py-2 text-center text-xs text-teal-200">
-                      🌊 Aerobic biological balance maintained for shrimp and fish ponds
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-2.5 mt-4 text-center">
-                    <div className="bg-white/5 rounded-2xl p-2.5 border border-white/10">
-                      <p className="text-teal-300 font-extrabold text-lg">24/7</p>
-                      <p className="text-[10px] text-white/55 uppercase tracking-wider font-semibold">Pond Stability</p>
-                    </div>
-                    <div className="bg-white/5 rounded-2xl p-2.5 border border-white/10">
-                      <p className="text-emerald-300 font-extrabold text-lg">-90%</p>
-                      <p className="text-[10px] text-white/55 uppercase tracking-wider font-semibold">Sludge Buildup</p>
-                    </div>
-                    <div className="bg-white/5 rounded-2xl p-2.5 border border-white/10">
-                      <p className="text-teal-300 font-extrabold text-lg">100%</p>
-                      <p className="text-[10px] text-white/55 uppercase tracking-wider font-semibold">Eco-Safe</p>
-                    </div>
-                  </div>
+                {/* GMP Certified Top Right */}
+                <div className="absolute top-3 right-3 bg-emerald-500/20 border border-emerald-400/30 rounded-lg px-2 py-0.5 text-[10px] font-bold text-emerald-300">
+                  ISO &middot; GMP
                 </div>
-              )}
 
-              {/* Viewport 3: Gut Microbiome Action */}
-              {activeModelTab === 'gut' && (
-                <div className="animate-fade-in">
-                  <div className="h-64 md:h-72 rounded-2xl bg-gradient-to-b from-ocean-900/90 to-ocean-950/95 border border-teal-500/30 p-4 flex flex-col justify-between">
-                    <div className="flex items-center justify-between pb-2 border-b border-white/10">
-                      <span className="text-xs font-bold text-white flex items-center gap-1.5">
-                        <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
-                        Targeted Gut Bio-Defense
-                      </span>
-                      <span className="text-[10px] font-semibold text-teal-300 bg-teal-500/10 px-2 py-0.5 rounded-md">
-                        Shooter &amp; Hepano Boost
-                      </span>
-                    </div>
-
-                    <div className="flex items-center justify-around my-auto gap-4">
-                      <div className="relative flex items-center justify-center">
-                        <div className="w-24 h-24 rounded-full bg-gradient-to-br from-teal-400 to-ocean-600 flex items-center justify-center p-1 shadow-xl shadow-teal-500/30">
-                          <div className="w-full h-full rounded-full bg-ocean-950 flex flex-col items-center justify-center">
-                            <span className="text-2xl font-black text-teal-300 leading-none">99%</span>
-                            <span className="text-[9px] text-white/50 uppercase tracking-widest font-semibold mt-0.5">Bio-Shield</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="text-left space-y-1.5">
-                        <div className="bg-white/5 border border-white/10 rounded-xl px-3 py-1.5">
-                          <p className="text-white font-bold text-xs">Protease &amp; Phytase Activation</p>
-                          <p className="text-teal-300 text-[10px] font-semibold">+35% Nutrient Assimilation</p>
-                        </div>
-                        <div className="bg-white/5 border border-white/10 rounded-xl px-3 py-1.5">
-                          <p className="text-white font-bold text-xs">White Feces (WFS) Protection</p>
-                          <p className="text-emerald-400 text-[10px] font-semibold">Zero Pathogen Adherence</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="bg-teal-500/10 border border-teal-500/30 rounded-xl px-3 py-2 text-center text-xs text-teal-200">
-                      🔬 Hepatopancreatic release stimulates natural digestive enzymes
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-2.5 mt-4 text-center">
-                    <div className="bg-white/5 rounded-2xl p-2.5 border border-white/10">
-                      <p className="text-teal-300 font-extrabold text-lg">3 Days</p>
-                      <p className="text-[10px] text-white/55 uppercase tracking-wider font-semibold">WFS Recovery</p>
-                    </div>
-                    <div className="bg-white/5 rounded-2xl p-2.5 border border-white/10">
-                      <p className="text-emerald-300 font-extrabold text-lg">+28%</p>
-                      <p className="text-[10px] text-white/55 uppercase tracking-wider font-semibold">Daily Weight Gain</p>
-                    </div>
-                    <div className="bg-white/5 rounded-2xl p-2.5 border border-white/10">
-                      <p className="text-teal-300 font-extrabold text-lg">10B</p>
-                      <p className="text-[10px] text-white/55 uppercase tracking-wider font-semibold">CFU Spores</p>
-                    </div>
-                  </div>
+                {/* Product Packaging Image */}
+                <div className="my-2 h-36 sm:h-44 flex items-center justify-center">
+                  <img
+                    src={current.image}
+                    alt={current.name}
+                    className="max-h-full max-w-[170px] sm:max-w-[210px] object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)] hover:scale-105 transition-transform duration-300"
+                    loading="eager"
+                  />
                 </div>
-              )}
+
+                {/* Title & Tagline */}
+                <div className="text-center w-full mt-1">
+                  <h3 className="text-white font-display font-extrabold text-base sm:text-lg">{current.name}</h3>
+                  <p className="text-teal-300 text-xs font-medium mt-0.5">{current.tagline}</p>
+                  <p className="text-slate-300 text-xs mt-2 line-clamp-2 leading-relaxed px-2 font-normal">
+                    {current.description}
+                  </p>
+                </div>
+              </div>
+
+              {/* Metrics Row */}
+              <div className="grid grid-cols-3 gap-2 mt-3 text-center">
+                <div className="bg-white/5 rounded-xl p-2 border border-white/10">
+                  <p className="text-teal-300 font-extrabold text-sm sm:text-base">{current.stat1.val}</p>
+                  <p className="text-[9px] sm:text-[10px] text-white/60 uppercase tracking-wider font-semibold mt-0.5">{current.stat1.label}</p>
+                </div>
+                <div className="bg-white/5 rounded-xl p-2 border border-white/10">
+                  <p className="text-emerald-300 font-extrabold text-sm sm:text-base">{current.stat2.val}</p>
+                  <p className="text-[9px] sm:text-[10px] text-white/60 uppercase tracking-wider font-semibold mt-0.5">{current.stat2.label}</p>
+                </div>
+                <div className="bg-white/5 rounded-xl p-2 border border-white/10">
+                  <p className="text-teal-300 font-extrabold text-sm sm:text-base">{current.stat3.val}</p>
+                  <p className="text-[9px] sm:text-[10px] text-white/60 uppercase tracking-wider font-semibold mt-0.5">{current.stat3.label}</p>
+                </div>
+              </div>
+
+              {/* Bottom Quick Link */}
+              <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+                <span className="text-slate-400 text-[11px]">Commercial formulation</span>
+                <Link
+                  to={current.link}
+                  className="text-teal-300 hover:text-white font-bold inline-flex items-center gap-1 transition-colors"
+                >
+                  View Dosage &amp; Specs <ChevronRight size={13} />
+                </Link>
+              </div>
+
             </div>
           </div>
 

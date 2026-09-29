@@ -56,33 +56,21 @@ export default function KeytonePreloader({
             background: 'radial-gradient(ellipse at 50% 45%, #0d3b75 0%, #061D4A 60%, #020b1c 100%)',
           }}
         >
-          {/* 3D Holographic Orbiting Rings */}
+          {/* Elegant Ambient Glow Aura */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-            {/* Outer Cyan Ring */}
-            <div className="w-[360px] h-[360px] sm:w-[460px] sm:h-[460px] rounded-full border border-cyan-400/25 animate-spin-slow" />
-            
-            {/* Inner Emerald Ring */}
-            <div
-              className="absolute w-[280px] h-[280px] sm:w-[350px] sm:h-[350px] rounded-full border border-teal-400/35 border-dashed"
-              style={{ animation: 'spin 14s linear infinite reverse' }}
-            />
-
-            {/* Glowing Bio Pulse Aura */}
-            <div className="absolute w-56 h-56 bg-teal-500/25 rounded-full blur-3xl animate-pulse" />
-
-            {/* Water Ripple Ring */}
-            <div className="absolute w-[520px] h-[520px] rounded-full border border-white/10 animate-ping opacity-20" />
+            {/* Subtle Pulse Aura */}
+            <div className="w-72 h-72 sm:w-96 sm:h-96 bg-teal-500/20 rounded-full blur-3xl animate-pulse" />
           </div>
 
-          {/* Center 3D Logo Stage (Only Logo) */}
+          {/* Center Logo Stage (Clean Logo) */}
           <motion.div
-            initial={{ scale: 0.85, opacity: 0, y: 10 }}
+            initial={{ scale: 0.9, opacity: 0, y: 8 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="relative z-10 flex flex-col items-center"
+            transition={{ duration: 0.4, ease: 'easeOut' }}
+            className="relative z-10 flex flex-col items-center px-4"
           >
-            {/* Authentic 3D Keytone Logo */}
-            <Keytone3DLogo className="w-72 sm:w-88 max-w-[85vw]" is3D={true} glow={true} />
+            {/* Authentic Keytone Official Logo */}
+            <Keytone3DLogo className="w-64 sm:w-80 max-w-[80vw]" is3D={false} glow={true} />
 
             {/* Glowing Minimalist Progress Bar */}
             <div className="mt-8 w-56 sm:w-72 flex flex-col items-center">

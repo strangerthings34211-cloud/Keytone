@@ -106,7 +106,7 @@ export default function ProductDetailPage() {
       content: (
         <div>
           <h4 className="font-semibold text-ocean-900 mb-3">Pack Sizes & Storage</h4>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="bg-slate-50 rounded-xl p-4">
               <p className="text-xs text-slate-500 font-medium uppercase tracking-wide mb-2">Available Sizes</p>
               <div className="flex flex-wrap gap-2">
@@ -166,15 +166,15 @@ export default function ProductDetailPage() {
                   {product.name}
                 </h1>
                 <p className="text-teal-600 font-semibold mb-4">{product.tagline}</p>
-                <p className="text-slate-600 leading-relaxed text-lg">{product.description}</p>
+                <p className="text-slate-600 leading-relaxed text-base sm:text-lg">{product.description}</p>
               </div>
 
               {/* Product image */}
-              <div className="rounded-3xl overflow-hidden mb-8 h-72 bg-slate-100">
+              <div className="rounded-3xl overflow-hidden mb-8 h-64 sm:h-80 bg-gradient-to-b from-slate-50 to-slate-100 p-6 flex items-center justify-center border border-slate-200">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover"
+                  className="max-h-full max-w-full object-contain drop-shadow-xl"
                   loading="lazy"
                 />
               </div>

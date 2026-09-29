@@ -149,35 +149,35 @@ export default function AboutPage() {
               </div>
             </div>
             {/* Image & Chairman Quote Showcase */}
-            <div className="relative mt-8 lg:mt-0">
+            <div className="relative mt-12 lg:mt-0">
               {/* Main Image */}
               <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-100">
                 <img
                   src={SITE_IMAGES.aboutSustain}
                   alt="Keytone Life Sciences sustainable aqua farming operations"
-                  className="w-full h-[420px] lg:h-[500px] object-cover hover:scale-105 transition-transform duration-700"
+                  className="w-full h-[360px] sm:h-[420px] lg:h-[500px] object-cover hover:scale-105 transition-transform duration-700"
                   loading="lazy"
                 />
               </div>
 
-              {/* Chairman's Quote Overlay - Positioned Top Left */}
-              <div className="absolute -top-6 -left-4 md:-left-8 bg-ocean-950/95 backdrop-blur-xl text-white rounded-3xl p-5 md:p-6 max-w-xs md:max-w-sm border border-teal-400/30 shadow-[0_20px_50px_rgba(6,29,74,0.35)] z-20">
-                <div className="flex items-center gap-2 mb-2.5">
-                  <div className="w-8 h-8 rounded-full bg-teal-500/20 border border-teal-400/40 flex items-center justify-center text-teal-300">
-                    <Quote size={16} className="fill-teal-300" />
+              {/* Chairman's Quote Overlay */}
+              <div className="absolute -top-7 left-2 right-2 sm:right-auto sm:-left-4 md:-left-8 bg-ocean-950/95 backdrop-blur-xl text-white rounded-3xl p-4 sm:p-5 md:p-6 max-w-sm border border-teal-400/30 shadow-[0_20px_50px_rgba(6,29,74,0.35)] z-20">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-teal-500/20 border border-teal-400/40 flex items-center justify-center text-teal-300 shrink-0">
+                    <Quote size={14} className="fill-teal-300" />
                   </div>
-                  <span className="text-[11px] font-bold text-teal-300 uppercase tracking-wider">
+                  <span className="text-[10px] sm:text-[11px] font-bold text-teal-300 uppercase tracking-wider">
                     Chairman's Vision
                   </span>
                 </div>
 
-                <blockquote className="text-sm md:text-base font-semibold italic leading-relaxed text-white/95">
+                <blockquote className="text-xs sm:text-sm md:text-base font-semibold italic leading-relaxed text-white/95">
                   "Our belief is simple: <span className="text-gradient-hero not-italic font-bold">Healthy Culture, Wealthy Farmer."</span>
                 </blockquote>
 
-                <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between">
+                <div className="mt-2.5 pt-2.5 border-t border-white/10 flex items-center justify-between">
                   <p className="text-xs font-bold text-teal-300">Vijaya Krishna G</p>
-                  <span className="text-[11px] text-white/60">Chairman, Keytone</span>
+                  <span className="text-[10px] sm:text-[11px] text-white/60">Chairman, Keytone</span>
                 </div>
               </div>
 
