@@ -24,19 +24,8 @@ const PrivacyPolicyPage   = lazy(() => import('@/pages/PrivacyPolicyPage'))
 const NotFoundPage        = lazy(() => import('@/pages/NotFoundPage'))
 
 export default function App() {
-  const [initialLoading, setInitialLoading] = useState(true)
-
   return (
     <HelmetProvider>
-      {/* 3D Model Keytone Initial Site Preloader */}
-      {initialLoading && (
-        <KeytonePreloader
-          minDuration={1400}
-          fullScreen={true}
-          onFinish={() => setInitialLoading(false)}
-        />
-      )}
-
       <BrowserRouter>
         <Suspense fallback={<KeytonePreloader isSuspense={true} fullScreen={true} />}>
           <Routes>

@@ -5,7 +5,7 @@ import {
   Globe, Users, ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, Phone, Sparkles,
   ZoomIn, Maximize2, X, Eye, Image as ImageIcon, ShieldCheck, Zap, Layers, Filter, CheckCircle2,
 } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { cn } from '@/utils/cn'
 import TrustBar from '@/components/sections/TrustBar'
@@ -17,6 +17,7 @@ import VideoShowcaseSection from '@/components/sections/VideoShowcaseSection'
 import GlobalReachSection from '@/components/sections/GlobalReachSection'
 import SectionHeader from '@/components/ui/SectionHeader'
 import SectionBackgroundFlora from '@/components/ui/SectionBackgroundFlora'
+import AquacultureWaterSimulator from '@/components/ui/AquacultureWaterSimulator'
 
 
 import CategoryCard from '@/components/products/CategoryCard'
@@ -37,13 +38,10 @@ function HeroVideoSection() {
   const { scrollY } = useScroll()
   const videoY = useTransform(scrollY, [0, 800], [0, 180])
   const videoScale = useTransform(scrollY, [0, 800], [1.05, 1.18])
-  const overlayOpacity = useTransform(scrollY, [0, 600], [0.82, 0.96])
+  const overlayOpacity = useTransform(scrollY, [0, 600], [0.75, 0.92])
 
   const toggleHeroSound = () => {
-    if (heroVideoRef.current) {
-      heroVideoRef.current.muted = !heroMuted
-      setHeroMuted(!heroMuted)
-    }
+    setHeroMuted(!heroMuted)
   }
 
   const HIGHLIGHTS = {
@@ -52,11 +50,13 @@ function HeroVideoSection() {
       tagline: 'β-Glucan + Probiotics + Multi-Enzymes',
       badge: '✨ Best Seller',
       icon: '🔬',
-      image: '/images/I-Boost-1.png',
+      image: '/images/Keytone-I-Boost.png',
+      fallbackImage: '/images/I-Boost-1.png',
       link: '/products/enzymes/i-boost',
       stat1: { val: '1.18', label: 'Optimized FCR' },
       stat2: { val: '+38%', label: 'Higher Survival' },
       stat3: { val: '100%', label: 'Bio Safe' },
+      highlightBadge: '⚡ 38% Immunity Boost',
       description: 'Strengthens hepatopancreas vitality, stimulates natural feeding response, and improves feed conversion efficiency across high-density ponds.'
     },
     keytoneps: {
@@ -69,6 +69,7 @@ function HeroVideoSection() {
       stat1: { val: '<0.01', label: 'Ammonia ppm' },
       stat2: { val: '+45%', label: 'DO Saturation' },
       stat3: { val: '0 CFU', label: 'Vibrio Control' },
+      highlightBadge: '💧 Sludge & H₂S Control',
       description: 'Reduces toxic hydrogen sulfide (H₂S) and organic sludge, creating a stable, clean phytoplankton environment.'
     },
     shooter: {
@@ -81,6 +82,7 @@ function HeroVideoSection() {
       stat1: { val: '3 Days', label: 'WFS Control' },
       stat2: { val: '99%', label: 'Gut Bio-Shield' },
       stat3: { val: '+28%', label: 'Weight Gain' },
+      highlightBadge: '🛡️ 3-Day Recovery',
       description: 'Clears white gut and running mortality by restoring beneficial intestinal microflora and gut mucosal barrier.'
     }
   }
@@ -89,29 +91,28 @@ function HeroVideoSection() {
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-ocean-950">
-      {/* 1. Realistic Parallax Background Video */}
+      {/* 1. Realistic Parallax Background Video (Multi-Fish Aquaculture Water) */}
       <motion.div
         className="absolute inset-0 overflow-hidden pointer-events-none will-change-transform"
         style={{ y: videoY, scale: videoScale }}
       >
-        <video
-          ref={heroVideoRef}
-          autoPlay
-          loop
-          muted={heroMuted}
-          playsInline
-          poster="/images/Keytone-Life-Sciences.png"
-          className="w-full h-full object-cover object-center"
-        >
-          <source src="/videos/hero-aquaculture.webm" type="video/webm" />
-        </video>
+        {/* YouTube Seamless Multi-Fish Looping Background - Full Screen Desktop Cover */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
+          <iframe
+            src="https://www.youtube.com/embed/LVnqpYAFahQ?autoplay=1&mute=1&loop=1&playlist=LVnqpYAFahQ&controls=0&showinfo=0&rel=0&iv_load_policy=3&disablekb=1&modestbranding=1&playsinline=1"
+            title="Aquaculture Multi-Fish Swimming Video"
+            className="absolute top-1/2 left-1/2 w-[320vw] h-[320vh] min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 object-cover pointer-events-none border-0 opacity-90 scale-110"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
 
-        {/* Multi-layer Cinematic Overlays */}
+        {/* Multi-layer Cinematic Overlays for Perfect Readability and High Contrast */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-ocean-950/95 via-ocean-950/85 to-ocean-900/50"
+          className="absolute inset-0 bg-gradient-to-r from-ocean-950/90 via-ocean-950/70 to-ocean-900/35"
           style={{ opacity: overlayOpacity }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-ocean-950 via-transparent to-ocean-950/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ocean-950/95 via-transparent to-ocean-950/40" />
         
         {/* Animated ambient glowing lights */}
         <div className="absolute top-1/4 left-1/4 w-80 sm:w-96 h-80 sm:h-96 bg-teal-500/20 rounded-full blur-3xl pointer-events-none animate-pulse" />
@@ -124,6 +125,13 @@ function HeroVideoSection() {
         withPetals={true}
         withRipples={true}
         withLeaves={true}
+      />
+
+      {/* Realistic Swimming Fish, Vannamei Prawns & Aeration Pond Simulation */}
+      <AquacultureWaterSimulator
+        className="absolute inset-0 pointer-events-none z-[3]"
+        opacity={0.9}
+        speciesCount={{ fish: 8, prawns: 7, bubbles: 40 }}
       />
 
       {/* Hero Video Audio Toggle Float */}
@@ -144,8 +152,8 @@ function HeroVideoSection() {
           
           {/* Left Column: Heading & Content */}
           <div className="lg:col-span-7 max-w-3xl text-center lg:text-left">
-            {/* Tag Badge with Shimmer */}
-            <div className="inline-flex items-center gap-2 bg-teal-500/20 backdrop-blur-md border border-teal-400/50 text-teal-300 text-[11px] sm:text-xs font-semibold tracking-widest uppercase px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6 shadow-sm">
+            {/* Tag Badge with Glowing Indicator */}
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-teal-500/20 to-cyan-500/10 backdrop-blur-xl border border-teal-400/40 text-teal-300 text-[11px] sm:text-xs font-semibold tracking-wider uppercase px-4 py-2 rounded-full mb-5 sm:mb-6 shadow-[0_0_20px_rgba(45,212,191,0.2)]">
               <span className="w-2 h-2 rounded-full bg-teal-400 animate-ping" />
               <span className="w-1.5 h-1.5 rounded-full bg-teal-400 -ml-3" />
               Aquaculture Biotechnology &amp; Feed Supplements
@@ -153,77 +161,72 @@ function HeroVideoSection() {
 
             {/* Main Headline */}
             <h1
-              className="font-display font-extrabold text-white leading-[1.08] sm:leading-[1.05] tracking-tight mb-4 sm:mb-6 drop-shadow-md text-3xl sm:text-5xl md:text-6xl lg:text-[4rem]"
+              className="font-display font-black text-white leading-[1.08] sm:leading-[1.04] tracking-tight mb-4 sm:mb-6 drop-shadow-lg text-3xl sm:text-5xl md:text-6xl lg:text-[4.1rem]"
             >
               Healthy Culture,<br />
-              <span className="bg-gradient-to-r from-teal-300 via-cyan-300 to-emerald-400 bg-clip-text text-transparent drop-shadow-[0_2px_15px_rgba(45,212,191,0.4)]">
+              <span className="bg-gradient-to-r from-teal-300 via-cyan-300 to-emerald-400 bg-clip-text text-transparent drop-shadow-[0_4px_30px_rgba(45,212,191,0.5)]">
                 Wealthy Farmer
               </span>
             </h1>
 
             {/* Subheadline */}
-            <p className="text-white/85 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed mb-5 sm:mb-6 max-w-2xl font-normal mx-auto lg:mx-0">
+            <p className="text-slate-200 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed mb-6 sm:mb-8 max-w-2xl font-normal mx-auto lg:mx-0 drop-shadow-sm">
               GMP, ISO 9001 &amp; HACCP certified probiotics, enzymes, and water conditioners engineered to optimize FCR, boost natural immunity, and protect shrimp &amp; fish crops across 10+ global markets.
             </p>
 
             {/* Trust Badges Strip */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-3 mb-6 sm:mb-8 text-xs text-white/90">
-              <div className="flex items-center gap-1.5 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15">
-                <CheckCircle2 size={13} className="text-teal-400 shrink-0" />
-                <span>GMP &amp; ISO 9001:2015</span>
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 sm:gap-3 mb-6 sm:mb-8 text-xs text-white/95">
+              <div className="flex items-center gap-2 bg-ocean-900/70 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-teal-500/30 shadow-sm">
+                <CheckCircle2 size={14} className="text-teal-400 shrink-0" />
+                <span className="font-medium">GMP &amp; ISO 9001:2015</span>
               </div>
-              <div className="flex items-center gap-1.5 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15">
-                <CheckCircle2 size={13} className="text-emerald-400 shrink-0" />
-                <span>12+ Years Field-Tested</span>
+              <div className="flex items-center gap-2 bg-ocean-900/70 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-emerald-500/30 shadow-sm">
+                <CheckCircle2 size={14} className="text-emerald-400 shrink-0" />
+                <span className="font-medium">12+ Years Field-Tested</span>
               </div>
-              <div className="flex items-center gap-1.5 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15">
-                <CheckCircle2 size={13} className="text-teal-400 shrink-0" />
-                <span>10+ Global Markets</span>
+              <div className="flex items-center gap-2 bg-ocean-900/70 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-cyan-500/30 shadow-sm">
+                <CheckCircle2 size={14} className="text-cyan-400 shrink-0" />
+                <span className="font-medium">10+ Global Markets</span>
               </div>
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 sm:gap-4">
               <Link
                 to="/products"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-teal-400 via-cyan-400 to-teal-500 text-ocean-950 font-bold px-7 sm:px-8 py-3.5 sm:py-4 rounded-full hover:from-teal-300 hover:to-teal-400 transition-all duration-200 shadow-[0_4px_25px_rgba(45,212,191,0.35)] hover:scale-105 text-sm"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-teal-400 via-cyan-400 to-teal-500 text-ocean-950 font-bold px-8 py-4 rounded-full hover:from-teal-300 hover:to-teal-400 transition-all duration-300 shadow-[0_4px_30px_rgba(45,212,191,0.45)] hover:shadow-[0_6px_35px_rgba(45,212,191,0.6)] hover:scale-105 text-sm sm:text-base cursor-pointer"
               >
-                Explore 30+ Products <ArrowRight size={16} />
+                Explore 30+ Products <ArrowRight size={17} />
               </Link>
-
-              <button
-                onClick={() => {
-                  const target = document.getElementById('keytone-video-tour')
-                  if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' })
-                  }
-                }}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-md border border-white/25 hover:border-teal-400/50 text-white font-semibold px-6 sm:px-7 py-3.5 sm:py-4 rounded-full hover:bg-white/20 transition-all duration-200 text-sm cursor-pointer"
-              >
-                <Play size={15} className="text-teal-400 fill-teal-400 animate-pulse" /> Watch Video Tour
-              </button>
             </div>
           </div>
 
           {/* Right Column: Clean Spotlight Formulation Showcase */}
-          <div className="lg:col-span-5 relative mt-4 lg:mt-0">
-            {/* Ambient Background Glow */}
-            <div className="absolute -inset-1.5 bg-gradient-to-r from-teal-500/35 via-cyan-500/25 to-emerald-500/35 rounded-3xl blur-2xl opacity-80 pointer-events-none" />
+          <div className="lg:col-span-5 relative mt-6 lg:mt-0">
+            {/* Ambient Background Aura */}
+            <div className="absolute -inset-2 bg-gradient-to-tr from-teal-500/30 via-cyan-500/20 to-emerald-500/30 rounded-3xl blur-2xl opacity-75 pointer-events-none" />
 
-            <div className="relative bg-ocean-950/90 backdrop-blur-2xl border border-white/20 rounded-3xl p-5 sm:p-6 shadow-2xl overflow-hidden">
+            <div className="relative bg-gradient-to-b from-ocean-900/95 via-ocean-950/98 to-ocean-950 backdrop-blur-2xl border border-teal-500/30 rounded-2xl sm:rounded-3xl p-4 sm:p-5 shadow-[0_20px_50px_rgba(0,0,0,0.6)] overflow-hidden">
               
-              {/* Selector Tabs */}
-              <div className="flex items-center justify-between pb-3.5 mb-4 border-b border-white/10 flex-wrap gap-2">
-                <span className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
-                  <Sparkles size={13} className="text-teal-400" /> Featured Solutions
-                </span>
+              {/* Selector Tabs Header */}
+              <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-white/10 flex-wrap gap-2">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-5 h-5 rounded-md bg-teal-500/20 border border-teal-400/40 flex items-center justify-center">
+                    <Sparkles size={11} className="text-teal-300" />
+                  </div>
+                  <span className="text-[11px] font-bold text-white uppercase tracking-wider">
+                    Featured Formulations
+                  </span>
+                </div>
 
-                <div className="flex bg-ocean-900/90 p-1 rounded-xl border border-white/10 text-xs">
+                <div className="flex bg-ocean-900/90 p-0.5 rounded-lg border border-white/15 text-xs">
                   <button
                     onClick={() => setActiveHighlight('iboost')}
                     className={cn(
-                      'px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg font-bold transition-all text-xs flex items-center gap-1',
-                      activeHighlight === 'iboost' ? 'bg-gradient-to-r from-teal-400 to-teal-500 text-ocean-950 shadow-md' : 'text-white/70 hover:text-white'
+                      'px-2.5 py-1 rounded-md font-bold transition-all text-xs flex items-center gap-1 cursor-pointer',
+                      activeHighlight === 'iboost'
+                        ? 'bg-gradient-to-r from-teal-400 to-teal-500 text-ocean-950 shadow-md scale-105'
+                        : 'text-white/70 hover:text-white'
                     )}
                   >
                     <span>🔬</span> I-Boost
@@ -231,8 +234,10 @@ function HeroVideoSection() {
                   <button
                     onClick={() => setActiveHighlight('keytoneps')}
                     className={cn(
-                      'px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg font-bold transition-all text-xs flex items-center gap-1',
-                      activeHighlight === 'keytoneps' ? 'bg-gradient-to-r from-teal-400 to-teal-500 text-ocean-950 shadow-md' : 'text-white/70 hover:text-white'
+                      'px-2.5 py-1 rounded-md font-bold transition-all text-xs flex items-center gap-1 cursor-pointer',
+                      activeHighlight === 'keytoneps'
+                        ? 'bg-gradient-to-r from-teal-400 to-teal-500 text-ocean-950 shadow-md scale-105'
+                        : 'text-white/70 hover:text-white'
                     )}
                   >
                     <span>💧</span> Keytone PS
@@ -240,8 +245,10 @@ function HeroVideoSection() {
                   <button
                     onClick={() => setActiveHighlight('shooter')}
                     className={cn(
-                      'px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg font-bold transition-all text-xs flex items-center gap-1',
-                      activeHighlight === 'shooter' ? 'bg-gradient-to-r from-teal-400 to-teal-500 text-ocean-950 shadow-md' : 'text-white/70 hover:text-white'
+                      'px-2.5 py-1 rounded-md font-bold transition-all text-xs flex items-center gap-1 cursor-pointer',
+                      activeHighlight === 'shooter'
+                        ? 'bg-gradient-to-r from-teal-400 to-teal-500 text-ocean-950 shadow-md scale-105'
+                        : 'text-white/70 hover:text-white'
                     )}
                   >
                     <span>🛡️</span> Shooter
@@ -249,65 +256,74 @@ function HeroVideoSection() {
                 </div>
               </div>
 
-              {/* Product Visual Showcase Box */}
-              <div className="relative rounded-2xl bg-gradient-to-b from-ocean-900/85 to-ocean-950/95 border border-teal-500/30 p-4 sm:p-5 flex flex-col items-center overflow-hidden">
-                {/* Radial ambient spot */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(45,212,191,0.15)_0%,transparent_70%)] pointer-events-none" />
+              {/* Compact Product Visual Showcase Box with Pedestal Glow */}
+              <div className="relative rounded-xl bg-gradient-to-b from-ocean-900/60 to-ocean-950/80 border border-white/10 p-3 sm:p-3.5 flex flex-col items-center overflow-hidden">
+                {/* Ambient Soft Pedestal Spotlight */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(45,212,191,0.25)_0%,transparent_75%)] pointer-events-none" />
 
-                {/* Badge Top Left */}
-                <div className="absolute top-3 left-3 bg-ocean-900/90 backdrop-blur-md border border-teal-400/30 rounded-lg px-2.5 py-1 text-[11px] font-semibold text-teal-300 shadow-md">
-                  {current.badge}
+                {/* Floating Top Badges */}
+                <div className="w-full flex items-center justify-between mb-1 relative z-10">
+                  <span className="bg-teal-500/20 backdrop-blur-md border border-teal-400/40 rounded-full px-2.5 py-0.5 text-[10px] font-bold text-teal-300 shadow-sm flex items-center gap-1">
+                    {current.badge}
+                  </span>
+                  <span className="bg-emerald-500/20 backdrop-blur-md border border-emerald-400/40 rounded-full px-2 py-0.5 text-[9px] font-bold text-emerald-300 tracking-wider">
+                    ISO &middot; GMP CERTIFIED
+                  </span>
                 </div>
 
-                {/* GMP Certified Top Right */}
-                <div className="absolute top-3 right-3 bg-emerald-500/20 border border-emerald-400/30 rounded-lg px-2 py-0.5 text-[10px] font-bold text-emerald-300">
-                  ISO &middot; GMP
+                {/* Product Packaging Image with Soft Shadow & Ambient Lighting */}
+                <div className="my-1 h-24 sm:h-28 w-full flex items-center justify-center relative z-10">
+                  <div className="relative flex items-center justify-center p-2 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 shadow-inner">
+                    <img
+                      src={current.image}
+                      onError={(e) => {
+                        if (current.fallbackImage && e.target.src !== current.fallbackImage) {
+                          e.target.src = current.fallbackImage
+                        }
+                      }}
+                      alt={current.name}
+                      className="max-h-20 sm:max-h-24 max-w-[140px] sm:max-w-[170px] object-contain drop-shadow-[0_8px_18px_rgba(0,0,0,0.6)] hover:scale-105 transition-transform duration-300"
+                      loading="eager"
+                    />
+                  </div>
                 </div>
 
-                {/* Product Packaging Image */}
-                <div className="my-2 h-36 sm:h-44 flex items-center justify-center relative z-10">
-                  <img
-                    src={current.image}
-                    alt={current.name}
-                    className="max-h-full max-w-[170px] sm:max-w-[210px] object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.7)] hover:scale-105 transition-transform duration-300"
-                    loading="eager"
-                  />
-                </div>
-
-                {/* Title & Tagline */}
+                {/* Title & Scientific Tagline */}
                 <div className="text-center w-full mt-1 relative z-10">
-                  <h3 className="text-white font-display font-extrabold text-base sm:text-lg">{current.name}</h3>
-                  <p className="text-teal-300 text-xs font-medium mt-0.5">{current.tagline}</p>
-                  <p className="text-slate-300 text-xs mt-2 line-clamp-2 leading-relaxed px-2 font-normal">
+                  <h3 className="text-white font-display font-bold text-sm sm:text-base tracking-tight">{current.name}</h3>
+                  <p className="text-teal-300 text-[11px] sm:text-xs font-semibold">{current.tagline}</p>
+                  <p className="text-slate-300 text-[11px] mt-1 line-clamp-2 leading-relaxed px-1 font-normal">
                     {current.description}
                   </p>
                 </div>
               </div>
 
-              {/* Metrics Row */}
-              <div className="grid grid-cols-3 gap-2 mt-3 text-center">
-                <div className="bg-white/5 rounded-xl p-2 border border-white/10 hover:border-teal-400/30 transition-colors">
-                  <p className="text-teal-300 font-extrabold text-sm sm:text-base">{current.stat1.val}</p>
-                  <p className="text-[9px] sm:text-[10px] text-white/60 uppercase tracking-wider font-semibold mt-0.5">{current.stat1.label}</p>
+              {/* Compact Metrics Strip */}
+              <div className="grid grid-cols-3 gap-2 mt-2.5 text-center">
+                <div className="bg-ocean-900/70 rounded-lg p-1.5 sm:p-2 border border-teal-400/20 hover:border-teal-400/40 transition-colors shadow-sm">
+                  <p className="text-teal-300 font-black text-sm sm:text-base leading-tight">{current.stat1.val}</p>
+                  <p className="text-[8px] sm:text-[9px] text-slate-300 uppercase tracking-wider font-semibold mt-0.5">{current.stat1.label}</p>
                 </div>
-                <div className="bg-white/5 rounded-xl p-2 border border-white/10 hover:border-emerald-400/30 transition-colors">
-                  <p className="text-emerald-300 font-extrabold text-sm sm:text-base">{current.stat2.val}</p>
-                  <p className="text-[9px] sm:text-[10px] text-white/60 uppercase tracking-wider font-semibold mt-0.5">{current.stat2.label}</p>
+                <div className="bg-ocean-900/70 rounded-lg p-1.5 sm:p-2 border border-emerald-400/20 hover:border-emerald-400/40 transition-colors shadow-sm">
+                  <p className="text-emerald-300 font-black text-sm sm:text-base leading-tight">{current.stat2.val}</p>
+                  <p className="text-[8px] sm:text-[9px] text-slate-300 uppercase tracking-wider font-semibold mt-0.5">{current.stat2.label}</p>
                 </div>
-                <div className="bg-white/5 rounded-xl p-2 border border-white/10 hover:border-teal-400/30 transition-colors">
-                  <p className="text-teal-300 font-extrabold text-sm sm:text-base">{current.stat3.val}</p>
-                  <p className="text-[9px] sm:text-[10px] text-white/60 uppercase tracking-wider font-semibold mt-0.5">{current.stat3.label}</p>
+                <div className="bg-ocean-900/70 rounded-lg p-1.5 sm:p-2 border border-cyan-400/20 hover:border-cyan-400/40 transition-colors shadow-sm">
+                  <p className="text-cyan-300 font-black text-sm sm:text-base leading-tight">{current.stat3.val}</p>
+                  <p className="text-[8px] sm:text-[9px] text-slate-300 uppercase tracking-wider font-semibold mt-0.5">{current.stat3.label}</p>
                 </div>
               </div>
 
-              {/* Bottom Quick Link */}
-              <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
-                <span className="text-slate-400 text-[11px]">Commercial formulation</span>
+              {/* Bottom Quick Link & Highlights */}
+              <div className="mt-2.5 pt-2.5 border-t border-white/10 flex items-center justify-between text-[11px]">
+                <span className="text-teal-300/90 font-medium flex items-center gap-1">
+                  {current.highlightBadge}
+                </span>
                 <Link
                   to={current.link}
-                  className="text-teal-300 hover:text-white font-bold inline-flex items-center gap-1 transition-colors"
+                  className="text-teal-300 hover:text-white font-bold inline-flex items-center gap-1 transition-colors group"
                 >
-                  View Dosage &amp; Specs <ChevronRight size={13} />
+                  Dosage &amp; Specs <ChevronRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
                 </Link>
               </div>
 
