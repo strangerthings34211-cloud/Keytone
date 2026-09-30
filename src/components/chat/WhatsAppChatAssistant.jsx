@@ -249,7 +249,7 @@ _Sent via Keytone Aquaculture Chat & Order System_`
   return (
     <>
       {/* ── Trigger / Floating Button ── */}
-      <div className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end">
+      <div className="fixed bottom-20 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end">
         {/* Tooltip / Prompt bubble on first load (if closed) */}
         <AnimatePresence>
           {!isOpen && hasPrompted && (

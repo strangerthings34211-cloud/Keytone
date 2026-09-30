@@ -362,7 +362,7 @@ export default function Navbar() {
           'fixed top-0 left-0 right-0 z-40 transition-all duration-300',
           scrolled
             ? 'bg-white/95 backdrop-blur-md shadow-nav py-0'
-            : 'bg-transparent py-1'
+            : 'bg-gradient-to-b from-ocean-950/90 via-ocean-950/50 to-transparent py-1.5'
         )}
       >
         <div className="container-xl">

@@ -96,12 +96,12 @@ function HeroVideoSection() {
         className="absolute inset-0 overflow-hidden pointer-events-none will-change-transform"
         style={{ y: videoY, scale: videoScale }}
       >
-        {/* YouTube Seamless Multi-Fish Looping Background - Full Screen Desktop Cover */}
-        <div className="absolute inset-0 w-full h-full overflow-hidden">
+        {/* YouTube Seamless Multi-Fish Looping Background - Full Responsive Normal Mobile & Desktop Cover */}
+        <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
           <iframe
             src="https://www.youtube.com/embed/LVnqpYAFahQ?autoplay=1&mute=1&loop=1&playlist=LVnqpYAFahQ&controls=0&showinfo=0&rel=0&iv_load_policy=3&disablekb=1&modestbranding=1&playsinline=1"
             title="Aquaculture Multi-Fish Swimming Video"
-            className="absolute top-1/2 left-1/2 w-[320vw] h-[320vh] min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 object-cover pointer-events-none border-0 opacity-90 scale-110"
+            className="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-full min-w-[177.78vh] -translate-x-1/2 -translate-y-1/2 object-cover pointer-events-none border-0 opacity-90"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           />
@@ -109,11 +109,11 @@ function HeroVideoSection() {
 
         {/* Multi-layer Cinematic Overlays for Perfect Readability and High Contrast */}
         <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-ocean-950/90 via-ocean-950/70 to-ocean-900/35"
+          className="absolute inset-0 bg-gradient-to-r from-ocean-950/85 via-ocean-950/60 to-ocean-900/30 md:from-ocean-950/90 md:via-ocean-950/70 md:to-ocean-900/35"
           style={{ opacity: overlayOpacity }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-ocean-950/95 via-transparent to-ocean-950/40" />
-        
+        <div className="absolute inset-0 bg-gradient-to-t from-ocean-950/90 via-transparent to-ocean-950/40" />
+
         {/* Animated ambient glowing lights */}
         <div className="absolute top-1/4 left-1/4 w-80 sm:w-96 h-80 sm:h-96 bg-teal-500/20 rounded-full blur-3xl pointer-events-none animate-pulse" />
         <div className="absolute bottom-1/3 right-1/4 w-72 sm:w-80 h-72 sm:h-80 bg-blue-500/20 rounded-full blur-3xl pointer-events-none" />
@@ -149,7 +149,7 @@ function HeroVideoSection() {
       {/* 2. Hero Content Grid */}
       <div className="container-xl relative z-10 pt-20 pb-12 sm:pt-24 sm:pb-16 lg:pt-28 lg:pb-16">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-          
+
           {/* Left Column: Heading & Content */}
           <div className="lg:col-span-7 max-w-3xl text-center lg:text-left">
             {/* Tag Badge with Glowing Indicator */}
@@ -207,7 +207,7 @@ function HeroVideoSection() {
             <div className="absolute -inset-2 bg-gradient-to-tr from-teal-500/30 via-cyan-500/20 to-emerald-500/30 rounded-3xl blur-2xl opacity-75 pointer-events-none" />
 
             <div className="relative bg-gradient-to-b from-ocean-900/95 via-ocean-950/98 to-ocean-950 backdrop-blur-2xl border border-teal-500/30 rounded-2xl sm:rounded-3xl p-4 sm:p-5 shadow-[0_20px_50px_rgba(0,0,0,0.6)] overflow-hidden">
-              
+
               {/* Selector Tabs Header */}
               <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-white/10 flex-wrap gap-2">
                 <div className="flex items-center gap-1.5">
@@ -415,12 +415,12 @@ function WhyChooseUs() {
             {/* Floating stat card */}
             <div className="absolute -left-4 top-10 bg-white rounded-2xl shadow-xl px-5 py-4 hidden md:flex flex-col items-center gap-1 border border-ocean-50">
               <span className="font-display font-extrabold text-3xl text-ocean-700">12+</span>
-              <span className="text-xs text-slate-500 font-medium text-center leading-tight">Years of<br/>Excellence</span>
+              <span className="text-xs text-slate-500 font-medium text-center leading-tight">Years of<br />Excellence</span>
             </div>
             {/* Certification badge */}
             <div className="absolute -right-4 top-10 bg-ocean-700 text-white rounded-2xl shadow-xl px-4 py-3 hidden md:flex flex-col items-center gap-1">
               <span className="text-lg">🏆</span>
-              <span className="text-xs font-bold text-center leading-tight">ISO 9001<br/>:2015</span>
+              <span className="text-xs font-bold text-center leading-tight">ISO 9001<br />:2015</span>
             </div>
           </div>
 
@@ -546,7 +546,7 @@ function CompanyGallery() {
   return (
     <section className="section-py section-light relative overflow-hidden">
       <SectionBackgroundFlora variant="light" withPetals={true} withRipples={true} />
-      
+
       <div className="container-xl relative z-10">
         <SectionHeader
           tag="Company Life"
@@ -753,7 +753,7 @@ function TopPerformingProductsSection({ featuredProducts, setEnquiryProduct }) {
   return (
     <section className="section-py section-white relative overflow-hidden">
       <SectionBackgroundFlora variant="white" withPetals={true} withRipples={true} />
-      
+
       <div className="container-xl relative z-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-8">

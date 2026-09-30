@@ -52,18 +52,41 @@ export default function CTABanner({
           </p>
 
           <div className="flex flex-wrap gap-4 justify-center mb-8">
-            <Link
-              to={primaryCTA.href}
-              className="inline-flex items-center gap-2 bg-white text-ocean-800 font-bold px-7 py-3.5 rounded-full hover:bg-ocean-50 transition-all duration-200 shadow-xl text-sm"
-            >
-              {primaryCTA.label} <ArrowRight size={15} />
-            </Link>
-            <Link
-              to={secondaryCTA.href}
-              className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/25 text-white font-semibold px-7 py-3.5 rounded-full hover:bg-white/20 transition-all duration-200 text-sm"
-            >
-              {secondaryCTA.label}
-            </Link>
+            {primaryCTA?.href?.startsWith('http') ? (
+              <a
+                href={primaryCTA.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-white text-ocean-800 font-bold px-7 py-3.5 rounded-full hover:bg-ocean-50 transition-all duration-200 shadow-xl text-sm"
+              >
+                {primaryCTA.label} <ArrowRight size={15} />
+              </a>
+            ) : primaryCTA?.href ? (
+              <Link
+                to={primaryCTA.href}
+                className="inline-flex items-center gap-2 bg-white text-ocean-800 font-bold px-7 py-3.5 rounded-full hover:bg-ocean-50 transition-all duration-200 shadow-xl text-sm"
+              >
+                {primaryCTA.label} <ArrowRight size={15} />
+              </Link>
+            ) : null}
+
+            {secondaryCTA?.href?.startsWith('http') ? (
+              <a
+                href={secondaryCTA.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/25 text-white font-semibold px-7 py-3.5 rounded-full hover:bg-white/20 transition-all duration-200 text-sm"
+              >
+                {secondaryCTA.label}
+              </a>
+            ) : secondaryCTA?.href ? (
+              <Link
+                to={secondaryCTA.href}
+                className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/25 text-white font-semibold px-7 py-3.5 rounded-full hover:bg-white/20 transition-all duration-200 text-sm"
+              >
+                {secondaryCTA.label}
+              </Link>
+            ) : null}
           </div>
 
           {/* Contact quick links */}

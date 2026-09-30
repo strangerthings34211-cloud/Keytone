@@ -23,9 +23,9 @@ export default function HeroSection({
 }) {
   const heights = {
     full:   'min-h-screen',
-    large:  'min-h-[580px] lg:min-h-[660px]',
-    medium: 'min-h-[420px] lg:min-h-[500px]',
-    small:  'min-h-[300px] lg:min-h-[360px]',
+    large:  'min-h-[460px] sm:min-h-[560px] lg:min-h-[660px]',
+    medium: 'min-h-[320px] sm:min-h-[380px] lg:min-h-[480px]',
+    small:  'min-h-[220px] sm:min-h-[260px] lg:min-h-[320px]',
   }
 
   const overlayStyle =
@@ -72,7 +72,7 @@ export default function HeroSection({
       <div className="absolute bottom-0 left-0 w-48 h-48 bg-ocean-950/30 rounded-full translate-y-1/2 -translate-x-1/2 pointer-events-none" />
 
       {/* Content */}
-      <div className="container-xl relative z-10 py-28 lg:py-36">
+      <div className="container-xl relative z-10 pt-24 pb-10 sm:py-20 lg:py-28">
         {breadcrumbs && (
           <Breadcrumb items={breadcrumbs} light className="mb-5" />
         )}

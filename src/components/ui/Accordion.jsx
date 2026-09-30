@@ -55,7 +55,7 @@ export default function Accordion({ items = [], allowMultiple = false }) {
   }
 
   return (
-    <div className="divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white px-6">
+    <div className="divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white px-4 sm:px-6">
       {items.map((item, index) => (
         <AccordionItem
           key={index}
